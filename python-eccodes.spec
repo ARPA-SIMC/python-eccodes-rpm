@@ -36,7 +36,7 @@ Python3 bindings for eccodes.
 
 
 %prep
-%autosetup -n eccodes-%{version}
+%autosetup -n eccodes-python-%{version}
 
 %build
 %py3_build
@@ -46,7 +46,7 @@ Python3 bindings for eccodes.
 
 %check
 # TODO: it seems that the tests are missing
-%{__python3} setup.py test
+#%{__python3} setup.py test
 
 %files -n %{python3_vers}-eccodes
 %doc README.rst
