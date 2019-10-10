@@ -7,7 +7,7 @@
 %global releaseno 1
 
 Name:           python-eccodes
-Version:        0.9.1
+Version:        0.9.3
 Release:        1%{?dist}
 Summary:        Python bindings for eccodes
 
@@ -45,7 +45,7 @@ Python3 bindings for eccodes.
 %py3_install
 
 %check
-# TODO: it seems that the tests are missing
+# it seems that the tests are missing
 #%{__python3} setup.py test
 
 %files -n %{python3_vers}-eccodes
@@ -54,5 +54,8 @@ Python3 bindings for eccodes.
 
 
 %changelog
-* Fri Jun 14 2019 Daniele Branchini <dbranchini@arpae.it>
+* Thu Oct 10 2019 Daniele Branchini <dbranchini@arpae.it> - 0.9.3-1
+- Upstream update
+
+* Fri Jun 14 2019 Daniele Branchini <dbranchini@arpae.it> - 0.9.1-1
 - Initial package
