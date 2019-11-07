@@ -29,8 +29,7 @@ Python bindings for eccodes.
 %package     -n %{python3_vers}-eccodes
 Summary:        Python3 bindings for Magics
 
-%{!?el7:Requires: python36-cffi}
-
+%{?el7:Requires: python36-cffi}
 
 %description -n %{python3_vers}-eccodes
 Python3 bindings for eccodes.
