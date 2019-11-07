@@ -4,7 +4,7 @@
 %define python3_vers python3
 %endif
 
-%global releaseno 1
+%global releaseno 2
 
 Name:           python-eccodes
 Version:        0.9.3
@@ -31,6 +31,9 @@ Python bindings for eccodes.
 %package     -n %{python3_vers}-eccodes
 Summary:        Python3 bindings for Magics
 
+%{!?el7:Requires: python36-cffi}
+
+
 %description -n %{python3_vers}-eccodes
 Python3 bindings for eccodes.
 
@@ -54,6 +57,9 @@ Python3 bindings for eccodes.
 
 
 %changelog
+* Thu Nov  7 2019 Daniele Branchini <dbranchini@arpae.it> - 0.9.3-2
+- Added missing dependency (fix #1)
+
 * Thu Oct 10 2019 Daniele Branchini <dbranchini@arpae.it> - 0.9.3-1
 - Upstream update
 
