@@ -4,11 +4,9 @@
 %define python3_vers python3
 %endif
 
-%global releaseno 2
-
 Name:           python-eccodes
 Version:        0.9.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python bindings for eccodes
 
 License:        Apache License, Version 2.0
