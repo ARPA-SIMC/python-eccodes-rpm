@@ -5,8 +5,8 @@
 %endif
 
 Name:           python-eccodes
-Version:        0.9.3
-Release:        2%{?dist}
+Version:        0.9.4
+Release:        1%{?dist}
 Summary:        Python bindings for eccodes
 
 License:        Apache License, Version 2.0
@@ -54,6 +54,9 @@ Python3 bindings for eccodes.
 
 
 %changelog
+* Thu Jan  2 2020 Emanuele Di Giacomo <edigiacomo@arpae.it> - 0.9.4-1
+- Upstream update
+
 * Thu Nov  7 2019 Daniele Branchini <dbranchini@arpae.it> - 0.9.3-2
 - Added missing dependency (fix #1)
 
