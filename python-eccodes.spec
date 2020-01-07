@@ -23,6 +23,8 @@ BuildRequires:  %{python3_vers}-cffi
 BuildRequires:  eccodes-devel
 
 Requires:       eccodes
+Requires:       %{python3_vers}-numpy
+Requires:       %{python3_vers}-cffi
 
 %description
 Python bindings for eccodes.
