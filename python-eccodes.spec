@@ -6,12 +6,13 @@
 
 Name:           python-eccodes
 Version:        0.9.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python bindings for eccodes
 
 License:        Apache License, Version 2.0
 URL:            https://pypi.org/project/eccodes-python/
 Source0:        https://files.pythonhosted.org/packages/source/e/eccodes-python/eccodes-python-%{version}.tar.gz#/eccodes-python-%{version}.tar.gz
+Patch1:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-%{release}/python-eccodes-disable-tests-without-inputfile.patch
 BuildArch:      noarch
 
 BuildRequires:  %{python3_vers}-devel
@@ -36,7 +37,7 @@ Python3 bindings for eccodes.
 
 
 %prep
-%autosetup -n eccodes-python-%{version}
+%autosetup -n eccodes-python-%{version} -p1
 
 %build
 %py3_build
@@ -45,8 +46,7 @@ Python3 bindings for eccodes.
 %py3_install
 
 %check
-# it seems that the tests are missing
-#%{__python3} setup.py test
+%{__python3} -m pytest
 
 %files -n %{python3_vers}-eccodes
 %doc README.rst
@@ -54,6 +54,9 @@ Python3 bindings for eccodes.
 
 
 %changelog
+* Tue Jan  7 2020 Emanuele Di Giacomo <edigiacomo@arpae.it> - 0.9.4-2
+- Enable tests (where possible)
+
 * Thu Jan  2 2020 Emanuele Di Giacomo <edigiacomo@arpae.it> - 0.9.4-1
 - Upstream update
 
