@@ -20,11 +20,13 @@ BuildRequires:  %{python3_vers}-numpy
 BuildRequires:  %{python3_vers}-pytest
 BuildRequires:  %{python3_vers}-setuptools
 BuildRequires:  %{python3_vers}-cffi
+BuildRequires:  %{python3_vers}-attrs
 BuildRequires:  eccodes-devel
 
 Requires:       eccodes
 Requires:       %{python3_vers}-numpy
 Requires:       %{python3_vers}-cffi
+Requires:       %{python3_vers}-attrs
 
 %description
 Python bindings for eccodes.
