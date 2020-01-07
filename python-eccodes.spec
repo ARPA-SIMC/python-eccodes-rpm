@@ -19,6 +19,7 @@ BuildRequires:  %{python3_vers}-devel
 BuildRequires:  %{python3_vers}-numpy
 BuildRequires:  %{python3_vers}-pytest
 BuildRequires:  %{python3_vers}-setuptools
+BuildRequires:  %{python3_vers}-cffi
 BuildRequires:  eccodes-devel
 
 Requires:       eccodes
