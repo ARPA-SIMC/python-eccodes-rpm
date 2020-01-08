@@ -48,7 +48,7 @@ if [[ $image =~ ^fedora: || $image =~ ^centos: ]]
 then
     mkdir -p ~/rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
     cp python-eccodes.spec ~/rpmbuild/SPECS/
-    spectool -g -R -S ~/rpmbuild/SPECS/python-eccodes.spec
+    spectool -g -R ~/rpmbuild/SPECS/python-eccodes.spec
     set +x
     rpmbuild -ba ~/rpmbuild/SPECS/python-eccodes.spec 2>&1 | pv -q -L 3k
 else
