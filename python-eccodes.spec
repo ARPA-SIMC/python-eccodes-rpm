@@ -4,17 +4,16 @@
 %define python3_vers python3
 %endif
 
-%global releaseno 5
+%global releaseno 1
 
 Name:           python-eccodes
-Version:        0.9.4
+Version:        0.9.5
 Release:        %{releaseno}%{?dist}
 Summary:        Python bindings for eccodes
 
 License:        Apache License, Version 2.0
 URL:            https://pypi.org/project/eccodes-python/
 Source0:        https://files.pythonhosted.org/packages/source/e/eccodes-python/eccodes-python-%{version}.tar.gz#/eccodes-python-%{version}.tar.gz
-Patch1:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-%{releaseno}/python-eccodes-disable-tests-without-inputfile.patch
 BuildArch:      noarch
 
 BuildRequires:  %{python3_vers}-devel
@@ -23,9 +22,9 @@ BuildRequires:  %{python3_vers}-pytest
 BuildRequires:  %{python3_vers}-setuptools
 BuildRequires:  %{python3_vers}-cffi
 BuildRequires:  %{python3_vers}-attrs
-BuildRequires:  eccodes-devel
+BuildRequires:  eccodes-devel >= 2.16
 
-Requires:       eccodes
+Requires:       eccodes >= 2.16
 Requires:       %{python3_vers}-numpy
 Requires:       %{python3_vers}-cffi
 Requires:       %{python3_vers}-attrs
