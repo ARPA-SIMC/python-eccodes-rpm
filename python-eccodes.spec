@@ -4,10 +4,10 @@
 %define python3_vers python3
 %endif
 
-%global releaseno 5
+%global releaseno 1
 
 Name:           python-eccodes
-Version:        0.9.4
+Version:        0.9.9
 Release:        %{releaseno}%{?dist}
 Summary:        Python bindings for eccodes
 
@@ -61,6 +61,9 @@ Python3 bindings for eccodes.
 
 
 %changelog
+* Fri Oct  2 2020 Daniele Branchini <dbranchini@arpae.it> - 0.9.9-1
+- Upstream update
+
 * Wed Jan  8 2020 Emanuele Di Giacomo <edigiacomo@arpae.it> - 0.9.4-5
 - Fixed patch URL
 
