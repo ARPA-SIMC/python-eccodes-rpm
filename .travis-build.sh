@@ -29,6 +29,7 @@ then
     dnf install -q -y git
     dnf install -q -y rpmdevtools
     dnf install -q -y pv
+    dnf copr enable -q -y simc/stable
 elif [[ $image =~ ^fedora: ]]
 then
     pkgcmd="dnf"
