@@ -1,4 +1,5 @@
 [![Build Status](https://simc.arpae.it/moncic-ci/python-eccodes-rpm/centos8.png)](https://simc.arpae.it/moncic-ci/python-eccodes-rpm/)
+[![Build Status](https://simc.arpae.it/moncic-ci/python-eccodes-rpm/fedora34.png)](https://simc.arpae.it/moncic-ci/python-eccodes-rpm/)
 [![Build Status](https://copr.fedorainfracloud.org/coprs/simc/stable/package/python-eccodes/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/simc/stable/package/python-eccodes/)
 
 # rpm packaging files for python-eccodes
