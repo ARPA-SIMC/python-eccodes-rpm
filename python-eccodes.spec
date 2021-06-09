@@ -1,7 +1,7 @@
 %global releaseno 1
 
 Name:           python-eccodes
-Version:        1.1.0
+Version:        1.3.2
 Release:        %{releaseno}%{?dist}
 Summary:        Python interface to the ecCodes GRIB and BUFR decoder/encoder
 License:        ASL 2.0
@@ -14,9 +14,15 @@ Patch1:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-
 # see https://github.com/ecmwf/eccodes-python/issues/36
 #Patch2:         python-eccodes-sphinx-config.patch
 Patch2:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-%{releaseno}/python-eccodes-sphinx-config.patch
+# ECMWF introduced a new dependency called findlibs
+# to find libeccodes.so easier on non-linux platforms.
+# Since this is not useful at all for fedora users 
+# I don't plan to package this python lib, so I patched out the use of it.
+#Patch3:         python-eccodes-disable-findlibs.patch
+Patch3:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-%{releaseno}/python-eccodes-disable-findlibs.patch
 
 # note that the fast bindings are arch dependent
-BuildRequires:  eccodes-devel >= 2.20.0
+BuildRequires:  eccodes-devel >= 2.21.0
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 # needed to build the fast bindings
@@ -90,6 +96,12 @@ rm %{buildroot}%{python3_sitearch}/gribapi/*.h
 
 
 %changelog
+* Sat Apr 17 2021 Jos de Kloe <josdekloe@gmail.com> 1.3.2-1
+- new upstream release 1.3.2
+
+* Fri Apr 09 2021 Jos de Kloe <josdekloe@gmail.com> 1.2.0-1
+- new upstream release 1.2.0
+
 * Sat Jan 30 2021 Jos de Kloe <josdekloe@gmail.com> 1.1.0-1
 - new upstream release 1.1.0
 

@@ -1,5 +1,5 @@
---- eccodes-1.1.0.unchanged/docs/conf.py	2020-06-24 14:43:03.000000000 +0200
-+++ eccodes-1.1.0/docs/conf.py	2021-01-23 20:08:57.362513852 +0100
+--- eccodes-1.3.2.p1/docs/conf.py	2021-04-17 10:55:56.098050726 +0200
++++ eccodes-1.3.2.p1p2/docs/conf.py	2021-04-17 10:56:30.645189523 +0200
 @@ -32,7 +32,7 @@ source_suffix = ".rst"
  master_doc = "index"
  
