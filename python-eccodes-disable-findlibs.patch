@@ -22,7 +22,7 @@
 -    raise RuntimeError("Cannot find the ecCodes library")
 +import os
 +import sys
-+library_path = os.path.join(sys.prefix, sys.platlibdir, 'libeccodes.so')
++library_path = os.path.join('/usr/lib64/libeccodes.so')
  
  # default encoding for ecCodes strings
  ENC = "ascii"

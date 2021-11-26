@@ -18,6 +18,8 @@ Patch2:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-
 # to find libeccodes.so easier on non-linux platforms.
 # Since this is not useful at all for fedora users 
 # I don't plan to package this python lib, so I patched out the use of it.
+# WARNING: the patch has been modified with hardcoded path avoding python3.9 dependency
+# see: https://github.com/ARPA-SIMC/python-eccodes-rpm/issues/3
 #Patch3:         python-eccodes-disable-findlibs.patch
 Patch3:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-%{releaseno}/python-eccodes-disable-findlibs.patch
 
