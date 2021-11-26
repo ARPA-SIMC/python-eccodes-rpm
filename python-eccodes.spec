@@ -1,7 +1,7 @@
 %global releaseno 1
 
 Name:           python-eccodes
-Version:        1.3.2
+Version:        1.3.3
 Release:        %{releaseno}%{?dist}
 Summary:        Python interface to the ecCodes GRIB and BUFR decoder/encoder
 License:        ASL 2.0
@@ -78,8 +78,15 @@ rm build/sphinx/html/.buildinfo
 %install
 %py3_install
 
-# remove *.h files that do not belong in a python module directory
-rm %{buildroot}%{python3_sitearch}/gribapi/*.h
+# NOTE:
+# this package includes 2 c header files named gribapi/eccodes.h and
+# gribapi/grib_api.h in the python module. This is intentional.
+# The cffi interface reads them during runtime and extracts some
+# constants from them.
+# The function grib_get_api_version is called during import of the eccodes
+# module and crashes with a runtime error if the files are not there.
+# Therefore this next delete has been disabled.
+#rm %%{buildroot}%%{python3_sitearch}/gribapi/*.h
 
 #check
 # tmp_path was introduced in version 3.9 of pytest, we're stuck with 3.4.2
@@ -96,6 +103,12 @@ rm %{buildroot}%{python3_sitearch}/gribapi/*.h
 
 
 %changelog
+* Sat Jul 03 2021 Jos de Kloe <josdekloe@gmail.com> 1.3.3-1
+- new upstream release 1.3.3
+
+* Fri Jun 04 2021 Python Maint <python-maint@redhat.com> - 1.3.2-2
+- Rebuilt for Python 3.10
+
 * Sat Apr 17 2021 Jos de Kloe <josdekloe@gmail.com> 1.3.2-1
 - new upstream release 1.3.2
 

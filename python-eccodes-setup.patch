@@ -1,5 +1,5 @@
---- eccodes-1.3.2.unchanged/setup.py	2021-04-16 12:56:50.000000000 +0200
-+++ eccodes-1.3.2.p1/setup.py	2021-04-17 10:55:56.100050676 +0200
+--- eccodes-1.3.3.unchanged/setup.py	2021-06-17 12:30:24.000000000 +0200
++++ eccodes-1.3.3.p1/setup.py	2021-07-03 11:59:17.432761578 +0200
 @@ -52,6 +52,8 @@ setuptools.setup(
      license="Apache License Version 2.0",
      url="https://github.com/ecmwf/eccodes-python",

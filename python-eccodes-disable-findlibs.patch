@@ -1,6 +1,6 @@
---- eccodes-1.3.2.p1p2/gribapi/bindings.py	2021-04-17 10:56:30.646189498 +0200
-+++ eccodes-1.3.2.p1p2p3/gribapi/bindings.py	2021-04-17 10:56:56.435546620 +0200
-@@ -24,14 +24,18 @@ __version__ = "1.3.2"
+--- eccodes-1.3.3.p1p2/gribapi/bindings.py	2021-07-03 12:00:31.326015160 +0200
++++ eccodes-1.3.3.p1p2p3/gribapi/bindings.py	2021-07-03 12:00:46.605654031 +0200
+@@ -24,14 +24,18 @@ __version__ = "1.3.3"
  
  LOG = logging.getLogger(__name__)
  
@@ -26,8 +26,8 @@
  
  # default encoding for ecCodes strings
  ENC = "ascii"
---- eccodes-1.3.2.p1p2/setup.py	2021-04-17 10:56:30.646189498 +0200
-+++ eccodes-1.3.2.p1p2p3/setup.py	2021-04-17 10:56:56.435546620 +0200
+--- eccodes-1.3.3.p1p2/setup.py	2021-07-03 12:00:31.327015136 +0200
++++ eccodes-1.3.3.p1p2p3/setup.py	2021-07-03 12:00:46.606654007 +0200
 @@ -40,7 +40,7 @@ install_requires = ["numpy"]
  if sys.version_info < (3, 7):
      install_requires = ["numpy<1.20"]
@@ -37,8 +37,8 @@
  
  setuptools.setup(
      name="eccodes",
---- eccodes-1.3.2.p1p2/eccodes.egg-info/requires.txt	2021-04-17 10:56:30.645189523 +0200
-+++ eccodes-1.3.2.p1p2p3/eccodes.egg-info/requires.txt	2021-04-17 10:56:56.435546620 +0200
+--- eccodes-1.3.3.p1p2/eccodes.egg-info/requires.txt	2021-07-03 12:00:31.326015160 +0200
++++ eccodes-1.3.3.p1p2p3/eccodes.egg-info/requires.txt	2021-07-03 12:00:46.605654031 +0200
 @@ -1,4 +1,3 @@
  numpy
  attrs
