@@ -8,7 +8,7 @@ host convenience files for backporting recent versions to CentOs 8 (derived from
 official fedora eccodes package: https://src.fedoraproject.org/rpms/python-eccodes)
 
 For more info see:
- * https://software.ecmwf.int/wiki/display/ECC/ecCodes+Home
+ * https://confluence.ecmwf.int/display/ECC/ecCodes+Home
  * https://pypi.org/project/eccodes-python/
 
 ## License
