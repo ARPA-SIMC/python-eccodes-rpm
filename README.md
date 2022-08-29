@@ -9,7 +9,7 @@ official fedora eccodes package: https://src.fedoraproject.org/rpms/python-eccod
 
 For more info see:
  * https://confluence.ecmwf.int/display/ECC/ecCodes+Home
- * https://pypi.org/project/eccodes-python/
+ * https://pypi.org/project/eccodes/
 
 ## License
 
