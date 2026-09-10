@@ -1,10 +1,13 @@
-[![Build Status](https://simc.arpae.it/moncic-ci/python-eccodes-rpm/centos8.png)](https://simc.arpae.it/moncic-ci/python-eccodes-rpm/)
+[![Build Status](https://simc.arpae.it/moncic-ci/python-eccodes-rpm/rocky8.png)](https://simc.arpae.it/moncic-ci/python-eccodes-rpm/)
+[![Build Status](https://simc.arpae.it/moncic-ci/python-eccodes-rpm/rocky9.png)](https://simc.arpae.it/moncic-ci/python-eccodes-rpm/)
+[![Build Status](https://simc.arpae.it/moncic-ci/python-eccodes-rpm/rocky10.png)](https://simc.arpae.it/moncic-ci/python-eccodes-rpm/)
+
 [![Build Status](https://copr.fedorainfracloud.org/coprs/simc/stable/package/python-eccodes/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/simc/stable/package/python-eccodes/)
 
 # rpm packaging files for python-eccodes
 
 This github repository neither hosts nor provide ecCodes python module sources, it's meant to
-host convenience files for backporting recent versions to CentOs 8 (derived from
+host convenience files for backporting recent versions to EPEL 8 and 10 (derived from
 official fedora eccodes package: https://src.fedoraproject.org/rpms/python-eccodes)
 
 For more info see:
