@@ -1,39 +1,32 @@
-%global releaseno 1
-
 Name:           python-eccodes
-Version:        1.3.3
-Release:        %{releaseno}%{?dist}
+Version:        2.45.0
+Release:        1%{?dist}
 Summary:        Python interface to the ecCodes GRIB and BUFR decoder/encoder
-License:        ASL 2.0
+License:        Apache-2.0
+
+%global sphinx_doc_path build/sphinx/html/
+
 # note: upstream has changed the name on pypi from eccodes-python to eccodes
 URL:            https://pypi.org/project/eccodes/
 Source0:        https://files.pythonhosted.org/packages/source/e/eccodes/eccodes-%{version}.tar.gz
 # see https://github.com/ecmwf/eccodes-python/pull/21
-#Patch1:         python-eccodes-setup.patch
-Patch1:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-%{releaseno}/python-eccodes-setup.patch
+Patch1:         python-eccodes-setup.patch
 # see https://github.com/ecmwf/eccodes-python/issues/36
-#Patch2:         python-eccodes-sphinx-config.patch
-Patch2:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-%{releaseno}/python-eccodes-sphinx-config.patch
+Patch2:         python-eccodes-sphinx-config.patch
 # ECMWF introduced a new dependency called findlibs
 # to find libeccodes.so easier on non-linux platforms.
 # Since this is not useful at all for fedora users 
 # I don't plan to package this python lib, so I patched out the use of it.
-# WARNING: the patch has been modified with hardcoded path avoding python3.9 dependency
-# see: https://github.com/ARPA-SIMC/python-eccodes-rpm/issues/3
-#Patch3:         python-eccodes-disable-findlibs.patch
-Patch3:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-%{releaseno}/python-eccodes-disable-findlibs.patch
+Patch3:         python-eccodes-disable-findlibs.patch
 
 # note that the fast bindings are arch dependent
-BuildRequires:  eccodes-devel >= 2.21.0
+BuildRequires:  eccodes-devel
 BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
 # needed to build the fast bindings
 BuildRequires:  python3-cffi
 # needed for checks/tests
-# tmp_path was introduced in version 3.9 of pytest, we're stuck with 3.4.2
-# disabling tests for CentOS 8
-#BuildRequires:  python3-pytest
-#BuildRequires:  python3-numpy
+BuildRequires:  python3-pytest
+BuildRequires:  python3-numpy
 # these next 2 seem not actually used, although they are mentioned as
 # test dependencies in the setup.py file:
 #BuildRequires:  python3-pytest-cov
@@ -48,7 +41,8 @@ BuildRequires:  python3-sphinx
 # as explained in bugzilla #1562066
 ExcludeArch: i686
 # as explained in bugzilla #1562076
-ExcludeArch: s390x
+# this one should no longer be necessary
+# ExcludeArch: s390x
 # as explained in bugzilla #1562084
 ExcludeArch: armv7hl
 
@@ -63,22 +57,21 @@ files and BUFR 3 and 4 files.
 %package -n python3-eccodes
 Summary: %summary
 
-%{?python_provide:%python_provide python3-eccodes}
 
 %description -n python3-eccodes %_description
 
 %prep
 %autosetup -n eccodes-%{version} -p1
 
+%generate_buildrequires
+%pyproject_buildrequires
+
 %build
-%py3_build
-# buld documentation
-%{__python3} setup.py build_sphinx
-# remove generated sphinx files that are not part of the actual documentation
-rm build/sphinx/html/.buildinfo
+%pyproject_wheel
 
 %install
-%py3_install
+%pyproject_install
+%pyproject_save_files -l eccodes gribapi
 
 # NOTE:
 # this package includes 2 c header files named gribapi/eccodes.h and
@@ -90,21 +83,128 @@ rm build/sphinx/html/.buildinfo
 # Therefore this next delete has been disabled.
 #rm %%{buildroot}%%{python3_sitearch}/gribapi/*.h
 
-#check
-# tmp_path was introduced in version 3.9 of pytest, we're stuck with 3.4.2
-#{__python3} -m eccodes selfcheck
-#{__python3} -m pytest -v
+# build documentation
+# note that the new sphinx-build command only works AFTER installation
+# of the module # so it can no longer be executed during the build stage.
+PYTHONPATH=%{buildroot}%{python3_sitearch} \
+sphinx-build -b html docs %sphinx_doc_path
 
-%files -n python3-eccodes
+# remove generated sphinx files that are not part of the actual documentation
+rm %sphinx_doc_path/.buildinfo
+rm -rf %sphinx_doc_path/.doctrees
+
+%check
+
+%{__python3} -m eccodes selfcheck
+%{__python3} -m pytest -v
+
+%files -n python3-eccodes -f %{pyproject_files}
+%license  LICENSE
 %doc README.rst
-%doc build/sphinx/html/
-%license LICENSE
-%{python3_sitearch}/eccodes-*-py*.egg-info
-%{python3_sitearch}/eccodes
-%{python3_sitearch}/gribapi
+%doc %sphinx_doc_path
 
 
 %changelog
+* Wed Jan 28 2026 Jos de Kloe <josdekloe@gmail.com> 2.45.0-1
+- move to upstream release 2.45.0
+ (skipped version 2.44.0 due to bug https://github.com/ecmwf/eccodes-python/issues/145)
+
+* Sat Jan 17 2026 Fedora Release Engineering <releng@fedoraproject.org> - 2.43.0-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_44_Mass_Rebuild
+
+* Fri Sep 19 2025 Python Maint <python-maint@redhat.com> - 2.43.0-3
+- Rebuilt for Python 3.14.0rc3 bytecode
+
+* Fri Aug 15 2025 Python Maint <python-maint@redhat.com> - 2.43.0-2
+- Rebuilt for Python 3.14.0rc2 bytecode
+
+* Mon Aug 11 2025 Jos de Kloe <josdekloe@gmail.com> 2.43.0-1
+- move to upstream release 2.43.0
+
+* Tue Jul 29 2025 Jos de Kloe <josdekloe@gmail.com> 2.42.0-1
+- move to upstream release 2.42.0
+
+* Fri Jul 25 2025 Fedora Release Engineering <releng@fedoraproject.org> - 2.39.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_43_Mass_Rebuild
+
+* Tue Jun 03 2025 Python Maint <python-maint@redhat.com> - 2.39.2-2
+- Rebuilt for Python 3.14
+
+* Sat Feb 08 2025 Jos de Kloe <josdekloe@gmail.com> 2.39.2-1
+- move to upstream release 2.39.2
+
+* Sat Jan 18 2025 Fedora Release Engineering <releng@fedoraproject.org> - 2.38.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
+
+* Sun Oct 27 2024 Jos de Kloe <josdekloe@gmail.com> 2.38.1-1
+- move to upstream release 2.38.1
+  Note that upstream numbering scheme has changed so 1.7.1 jumped to 2.37.0
+
+* Fri Jul 19 2024 Fedora Release Engineering <releng@fedoraproject.org> - 1.7.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
+
+* Sat Jun 08 2024 Python Maint <python-maint@redhat.com> - 1.7.0-2
+- Rebuilt for Python 3.13
+
+* Sun Mar 24 2024 Jos de Kloe <josdekloe@gmail.com> 1.7.0-1
+- new upstream release 1.7.0
+
+* Fri Jan 26 2024 Fedora Release Engineering <releng@fedoraproject.org> - 1.6.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
+
+* Mon Jan 22 2024 Fedora Release Engineering <releng@fedoraproject.org> - 1.6.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
+
+* Mon Nov 20 2023 Jos de Kloe <josdekloe@gmail.com> 1.6.1-1
+- new upstream release 1.6.1
+
+* Tue Aug 01 2023 Jos de Kloe <josdekloe@gmail.com> 1.6.0-2
+- fix sphinx call #bz2221958
+
+* Sat Jul 29 2023 Jos de Kloe <josdekloe@gmail.com> 1.6.0-1
+- new upstream release 1.6.0
+
+* Fri Jul 21 2023 Fedora Release Engineering <releng@fedoraproject.org> - 1.5.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_39_Mass_Rebuild
+
+* Wed Jun 14 2023 Python Maint <python-maint@redhat.com> - 1.5.2-2
+- Rebuilt for Python 3.12
+
+* Sat May 20 2023 Jos de Kloe <josdekloe@gmail.com> 1.5.2-1
+- new upstream release 1.5.2
+
+* Fri Jan 20 2023 Fedora Release Engineering <releng@fedoraproject.org> - 1.5.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_38_Mass_Rebuild
+
+* Wed Dec 28 2022 Jos de Kloe <josdekloe@gmail.com> 1.5.0-1
+- SPDX migration: change ASL 2.0 to Apache-2.0
+
+* Thu Sep 15 2022 Jos de Kloe <josdekloe@gmail.com> 1.5.0-1
+- new upstream release 1.5.0
+
+* Fri Jul 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1.4.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
+
+* Tue Jun 28 2022 Jos de Kloe <josdekloe@gmail.com> 1.4.2-1
+- new upstream release 1.4.2
+
+* Mon Jun 13 2022 Python Maint <python-maint@redhat.com> - 1.4.1-2
+- Rebuilt for Python 3.11
+
+* Sat Mar 12 2022 Jos de Kloe <josdekloe@gmail.com> 1.4.1-1
+- new upstream release 1.4.1
+
+* Fri Jan 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1.3.3-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
+* Sun Dec 05 2021 Jos de Kloe <josdekloe@gmail.com> 1.3.3-2
+- remove exclude arch voor s390x; should not be needed anymore
+  since eccodes builds now for this arch.
+
+* Tue Jul 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.3.3-2
+- Second attempt - Rebuilt for
+  https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
 * Sat Jul 03 2021 Jos de Kloe <josdekloe@gmail.com> 1.3.3-1
 - new upstream release 1.3.3
 
@@ -137,7 +237,7 @@ rm build/sphinx/html/.buildinfo
 * Sat Jul 04 2020 Jos de Kloe <josdekloe@gmail.com> 0.9.8-1
 - new upstream version
 
-* Tue May 26 2020 Miro Hrončok <mhroncok@redhat.com> - 0.9.7-2
+* Tue May 26 2020 Miro Hron?ok <mhroncok@redhat.com> - 0.9.7-2
 - Rebuilt for Python 3.9
 
 * Thu Mar 19 2020 Jos de Kloe <josdekloe@gmail.com> 0.9.7-1

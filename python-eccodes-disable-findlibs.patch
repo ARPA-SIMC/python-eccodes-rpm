@@ -1,46 +1,33 @@
---- eccodes-1.3.3.p1p2/gribapi/bindings.py	2021-07-03 12:00:31.326015160 +0200
-+++ eccodes-1.3.3.p1p2p3/gribapi/bindings.py	2021-07-03 12:00:46.605654031 +0200
-@@ -24,14 +24,18 @@ __version__ = "1.3.3"
+--- eccodes-2.45.0.p1p2/gribapi/bindings.py	2026-01-28 10:38:53.435292423 +0100
++++ eccodes-2.45.0.p1p2p3/gribapi/bindings.py	2026-01-28 10:45:39.610424912 +0100
+@@ -99,7 +99,8 @@ def find_binary_libs(name):
+     return foundlib
  
- LOG = logging.getLogger(__name__)
  
--try:
--    import ecmwflibs as findlibs
--except ImportError:
--    import findlibs
-+#try:
-+#    import ecmwflibs as findlibs
-+#except ImportError:
-+#    import findlibs
-+#
-+#library_path = findlibs.find("eccodes")
-+#if library_path is None:
-+#    raise RuntimeError("Cannot find the ecCodes library")
+-library_path = find_binary_libs("eccodes")
++# library_path = find_binary_libs("eccodes")
++library_path = os.path.join(sys.prefix, sys.platlibdir, 'libeccodes.so')
  
--library_path = findlibs.find("eccodes")
--if library_path is None:
--    raise RuntimeError("Cannot find the ecCodes library")
-+import os
-+import sys
-+library_path = os.path.join('/usr/lib64/libeccodes.so')
+ if library_path is None:
+     raise RuntimeError("Cannot find the ecCodes library")
+--- eccodes-2.45.0.p1p2/setup.py	2026-01-28 10:38:53.442694648 +0100
++++ eccodes-2.45.0.p1p2p3/setup.py	2026-01-28 10:45:39.616453423 +0100
+@@ -91,7 +91,7 @@ elif sys.version_info < (3, 9):
+ install_requires += [
+     "attrs",
+     "cffi",
+-    "findlibs",
++#    "findlibs",
+ ]
  
- # default encoding for ecCodes strings
- ENC = "ascii"
---- eccodes-1.3.3.p1p2/setup.py	2021-07-03 12:00:31.327015136 +0200
-+++ eccodes-1.3.3.p1p2p3/setup.py	2021-07-03 12:00:46.606654007 +0200
-@@ -40,7 +40,7 @@ install_requires = ["numpy"]
- if sys.version_info < (3, 7):
-     install_requires = ["numpy<1.20"]
- 
--install_requires += ["attrs", "cffi", "findlibs"]
-+install_requires += ["attrs", "cffi"] # , "findlibs"]
- 
- setuptools.setup(
-     name="eccodes",
---- eccodes-1.3.3.p1p2/eccodes.egg-info/requires.txt	2021-07-03 12:00:31.326015160 +0200
-+++ eccodes-1.3.3.p1p2p3/eccodes.egg-info/requires.txt	2021-07-03 12:00:46.605654031 +0200
-@@ -1,4 +1,3 @@
+ # only add eccodeslib as dependency if building a distribution that should depend on it
+--- eccodes-2.45.0.p1p2/eccodes.egg-info/requires.txt	2026-01-28 10:38:53.434989473 +0100
++++ eccodes-2.45.0.p1p2p3/eccodes.egg-info/requires.txt	2026-01-28 10:45:39.609938928 +0100
+@@ -1,7 +1,3 @@
  numpy
  attrs
  cffi
 -findlibs
+-
+-[:platform_system != "Windows"]
+-eccodeslib

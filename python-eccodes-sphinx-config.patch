@@ -1,20 +1,11 @@
---- eccodes-1.3.3.p1/docs/conf.py	2021-07-03 11:59:17.430761626 +0200
-+++ eccodes-1.3.3.p1p2/docs/conf.py	2021-07-03 12:00:31.325015184 +0200
+--- eccodes-2.45.0.p1/docs/conf.py	2026-01-28 10:34:45.205154454 +0100
++++ eccodes-2.45.0.p1p2/docs/conf.py	2026-01-28 10:38:53.433162834 +0100
 @@ -32,7 +32,7 @@ source_suffix = ".rst"
  master_doc = "index"
  
  # General information about the project.
--project = u"eccodes-python"
-+project = u"eccodes"
- copyright = u"2017-, European Centre for Medium-Range Weather Forecasts (ECMWF)."
+-project = "eccodes-python"
++project = "eccodes"
+ copyright = "2017-, European Centre for Medium-Range Weather Forecasts (ECMWF)."
  
  # The version info for the project you're documenting, acts as replacement
-@@ -40,7 +40,7 @@ copyright = u"2017-, European Centre for
- # the built documents.
- #
- # The full version, including alpha/beta/rc tags.
--release = pkg_resources.get_distribution("eccodes-python").version
-+release = pkg_resources.get_distribution("eccodes").version
- # The short X.Y version.
- version = ".".join(release.split(".")[:2])
- 
