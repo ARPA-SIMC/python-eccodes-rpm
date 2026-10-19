@@ -1,6 +1,6 @@
 Name:           python-eccodes
 Version:        2.48.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python interface to the ecCodes GRIB and BUFR decoder/encoder
 License:        Apache-2.0
 
@@ -18,6 +18,8 @@ Patch2:         python-eccodes-sphinx-config.patch
 # Since this is not useful at all for fedora users 
 # I don't plan to package this python lib, so I patched out the use of it.
 Patch3:         python-eccodes-disable-findlibs.patch
+
+BuildRequires: pyproject-rpm-macros
 
 # note that the fast bindings are arch dependent
 BuildRequires:  eccodes-devel
@@ -106,6 +108,9 @@ rm -rf %sphinx_doc_path/.doctrees
 
 
 %changelog
+* Mon Oct 19 2026 Daniele Branchini  <dbranchini@arpae.it> - 2.48.0-2
+- Added missing dependency
+
 * Sun Sep 06 2026 Jos de Kloe <josdekloe@gmail.com> 2.48.0-1
 - move to upstream release 2.48.0
 
