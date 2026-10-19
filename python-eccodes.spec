@@ -1,5 +1,5 @@
 Name:           python-eccodes
-Version:        2.45.0
+Version:        2.48.0
 Release:        1%{?dist}
 Summary:        Python interface to the ecCodes GRIB and BUFR decoder/encoder
 License:        Apache-2.0
@@ -27,6 +27,7 @@ BuildRequires:  python3-cffi
 # needed for checks/tests
 BuildRequires:  python3-pytest
 BuildRequires:  python3-numpy
+
 # these next 2 seem not actually used, although they are mentioned as
 # test dependencies in the setup.py file:
 #BuildRequires:  python3-pytest-cov
@@ -105,6 +106,24 @@ rm -rf %sphinx_doc_path/.doctrees
 
 
 %changelog
+* Sun Sep 06 2026 Jos de Kloe <josdekloe@gmail.com> 2.48.0-1
+- move to upstream release 2.48.0
+
+* Wed Jul 22 2026 Python Maint <python-maint@redhat.com> - 2.47.0-3
+- Rebuilt for Python 3.15.0b4 ABI change
+
+* Thu Jul 16 2026 Fedora Release Engineering <releng@fedoraproject.org> - 2.47.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_45_Mass_Rebuild
+
+* Mon Jun 15 2026 Jos de Kloe <josdekloe@gmail.com> 2.47.0-1
+- move to upstream release 2.47.0
+
+* Wed Jun 03 2026 Python Maint <python-maint@redhat.com> - 2.45.0-3
+- Rebuilt for Python 3.15
+
+* Thu May 07 2026 Tomáš Hrnčiar <thrnciar@redhat.com> - 2.45.0-2
+- Add BR on python3-pkg-resources, setuptools 82 dropped pkg_resources
+
 * Wed Jan 28 2026 Jos de Kloe <josdekloe@gmail.com> 2.45.0-1
 - move to upstream release 2.45.0
  (skipped version 2.44.0 due to bug https://github.com/ecmwf/eccodes-python/issues/145)
