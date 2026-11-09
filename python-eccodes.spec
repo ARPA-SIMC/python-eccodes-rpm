@@ -1,6 +1,8 @@
+%global releaseno 5
+
 Name:           python-eccodes
 Version:        2.48.0
-Release:        4%{?dist}
+Release:        %{releaseno}%{?dist}
 Summary:        Python interface to the ecCodes GRIB and BUFR decoder/encoder
 License:        Apache-2.0
 
@@ -10,14 +12,14 @@ License:        Apache-2.0
 URL:            https://pypi.org/project/eccodes/
 Source0:        https://files.pythonhosted.org/packages/source/e/eccodes/eccodes-%{version}.tar.gz
 # see https://github.com/ecmwf/eccodes-python/pull/21
-Patch1:         python-eccodes-setup.patch
+Patch1:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-%{releaseno}/python-eccodes-setup.patch
 # see https://github.com/ecmwf/eccodes-python/issues/36
-Patch2:         python-eccodes-sphinx-config.patch
+Patch2:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-%{releaseno}/python-eccodes-sphinx-config.patch
 # ECMWF introduced a new dependency called findlibs
 # to find libeccodes.so easier on non-linux platforms.
 # Since this is not useful at all for fedora users 
 # I don't plan to package this python lib, so I patched out the use of it.
-Patch3:         python-eccodes-disable-findlibs.patch
+Patch3:         https://github.com/arpa-simc/python-eccodes-rpm/raw/v%{version}-%{releaseno}/python-eccodes-disable-findlibs.patch
 
 BuildRequires: pyproject-rpm-macros
 BuildRequires: python3-wheel
@@ -110,6 +112,9 @@ rm -rf %sphinx_doc_path/.doctrees
 
 
 %changelog
+* Mon Nov 09 2026 Daniele Branchini  <dbranchini@arpae.it> - 2.48.0-5
+- Fixed patch path for copr
+
 * Mon Oct 19 2026 Daniele Branchini  <dbranchini@arpae.it> - 2.48.0-4
 - Row, row, row your boat, gently down the dependencies
 
